@@ -33,6 +33,8 @@ if not edited_df.equals(df_with_row_numbers):
     st.session_state.data_df = edited_df.drop(columns=['task_num'])
 st.divider()
 
+st.write(st.session_state.data_df)
+df =st.session_state.data_df 
 
 
 
