@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+df = pd.DataFrame(
+    [
+        { "task": "" ,"Done?":False} ])
 class Table:
     st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
     #header
@@ -36,6 +39,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
