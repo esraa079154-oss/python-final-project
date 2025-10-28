@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 class Table:
     def __init__(self, data):
+        st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
+        
         self.data = data
         if "data_df" not in st.session_state:
               st.session_state.data_df = pd.DataFrame(
@@ -25,6 +27,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
