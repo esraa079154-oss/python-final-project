@@ -30,11 +30,12 @@ class Table:
 table_data =  [{ "task": '' ,"Done?":False } ]
 
 # # # # # # إنشاء كائن من الفئة Table
-my_table = Table(table_data)
+#my_table = Table(table_data)
 
 # # # # # # طباعة الجدول
 
-my_table.print_table()
+#my_table.print_table()
+
 
 
 
