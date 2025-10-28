@@ -22,7 +22,7 @@ if "data_df" not in st.session_state:
     st.session_state.data_df = pd.DataFrame(
         [{ "task": '' ,"Done?":False } ])
 #df=pd.DataFrame(df)
-#df_with_row_numbers = st.session_state.data_df.reset_index(drop=False)
+df_with_row_numbers = st.session_state.data_df.reset_index(drop=False)
 df_with_row_numbers.rename(columns={'index': 'task_num'}, inplace=True)
 df_with_row_numbers['task_num'] = df_with_row_numbers['task_num'] + 1
 edited_df = st.data_editor(df_with_row_numbers, num_rows="dynamic", hide_index=True)
@@ -236,6 +236,7 @@ st.set_page_config(page_title="To_Do_List",page_icon='🧾')
 
 # # عرض شريط التقدم
 # st.progress(progress, text=f"تم إنجاز {int(progress*100)}% من المهام")
+
 
 
 
