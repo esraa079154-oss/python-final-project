@@ -12,6 +12,8 @@ class Table:
     user_name=st.text_input(" 👉 Please enter your name : ")
     if user_name:
         st.write(f"Welcome {user_name} ")
+    st.subheader("The plan ")
+st.image(r"https://emojiat.com/assets/img/emoji/1f4cb.png")
     def __init__(self, data):
         #st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
         
@@ -40,6 +42,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
