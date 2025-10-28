@@ -33,9 +33,27 @@ if not edited_df.equals(df_with_row_numbers):
     st.session_state.data_df = edited_df.drop(columns=['task_num'])
 st.divider()
 
-st.write(st.session_state.data_df)
-df =st.session_state.data_df 
+#st.write(st.session_state.data_df)
+#df =st.session_state.data_df 
 
+if True:
+    new_row_number=1 
+else:
+    new_row_number=st.session_state.data_df["task_num"].max()+1
+# if "Done" not in df.columns:
+#     df["Done?"] = False
+#shoe table and modify estimation(percentage)
+# edited_df = st.data_editor(df, num_rows="dynamic")
+#calculate the ratio of achievement of tasks
+if len(edited_df) > 0:
+    completed = edited_df["Done?"].sum()
+    total = len(edited_df)
+    progress = completed / total
+else:
+    progress = 0
+#estimation
+st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
+st.set_page_config(page_title="To_Do_List",page_icon='🧾')
 
 
 
