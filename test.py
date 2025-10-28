@@ -8,7 +8,7 @@ st.header("")
 #above the box of name 
 user_name=st.text_input(" 👉 Please enter your name : ")
 if user_name:
-    st.write(f"Welcome {user_name} 👋")
+    st.write(f"Welcome {user_name} ")
     
 st.subheader("The plan ")
 st.image(r"https://emojiat.com/assets/img/emoji/1f4cb.png")
@@ -236,6 +236,7 @@ st.set_page_config(page_title="To_Do_List",page_icon='🧾')
 
 # # عرض شريط التقدم
 # st.progress(progress, text=f"تم إنجاز {int(progress*100)}% من المهام")
+
 
 
 
