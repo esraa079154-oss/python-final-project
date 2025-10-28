@@ -66,7 +66,8 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
-my_est=estimation(progress)
+
+
 
 
 
