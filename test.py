@@ -6,7 +6,7 @@ class Table:
         if "data_df" not in st.session_state:
               st.session_state.data_df = pd.DataFrame(
         [{ "task": '' ,"Done?":False } ])
-my_table.print_table() 
+ 
     def print_table(self):
       pass 
 class Table:
@@ -25,6 +25,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
