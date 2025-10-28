@@ -50,7 +50,7 @@ class Table:
         for row in self.data:
             # طباعة كل خلية في الصف مع ترك مسافة
             print(" | ".join(map(str, row))) 
-    my_est=estimation(progress)
+    # my_est=estimation(progress)
     st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
     st.set_page_config(page_title="To_Do_List",page_icon='🧾')
 
@@ -67,6 +67,7 @@ my_table = Table(table_data)
 
 my_table.print_table()
 my_est=estimation(progress)
+
 
 
 
