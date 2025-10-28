@@ -29,6 +29,9 @@ df_with_row_numbers.rename(columns={'index': 'task_num'}, inplace=True)
 df_with_row_numbers['task_num'] = df_with_row_numbers['task_num'] + 1
 edited_df = st.data_editor(df_with_row_numbers, num_rows="dynamic", hide_index=True)
 
+if not edited_df.equals(df_with_row_numbers):
+    st.session_state.data_df = edited_df.drop(columns=['task_num'])
+st.divider()
 
 
 
