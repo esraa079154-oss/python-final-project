@@ -18,9 +18,9 @@ df = pd.DataFrame(
         { "task": "" ,"Done?":False} ])
 #to increase the width of bage
 st.set_page_config(layout="wide")
-if "data_df" not in st.session_state:
-    st.session_state.data_df = pd.DataFrame(
-        [{ "task": '' ,"Done?":False } ])
+# if "data_df" not in st.session_state:
+#     st.session_state.data_df = pd.DataFrame(
+#         [{ "task": '' ,"Done?":False } ])
 #df=pd.DataFrame(df)
 df_with_row_numbers = st.session_state.data_df.reset_index(drop=False)
 df_with_row_numbers.rename(columns={'index': 'task_num'}, inplace=True)
@@ -30,7 +30,7 @@ if not edited_df.equals(df_with_row_numbers):
     st.session_state.data_df = edited_df.drop(columns=['task_num'])
 st.divider()
 st.write(st.session_state.data_df)
-# df =st.session_state.data_df 
+df =st.session_state.data_df 
 #num_row=len(df)
 #if st.button("Add new row"):
     #new_counter_value =df["counter"].max()+1 
@@ -58,4 +58,5 @@ else:
     progress = 0
 #estimation
 st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
-st.set_page_config(page_title="To_Do_List",page_icon='🧾')
+st.set_page_config(page_title="To_Do_List",page_icon='🧾')�')
+
