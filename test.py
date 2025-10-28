@@ -45,11 +45,17 @@ class Table:
         total = len(edited_df)
         progress = completed / total
     else:
-        progress = 0
+        progress = 0 
     def print_table(self):
         for row in self.data:
             # طباعة كل خلية في الصف مع ترك مسافة
-            print(" | ".join(map(str, row)))
+            print(" | ".join(map(str, row))) 
+
+
+class estimation :
+    def __init__(self,progress): 
+        self.progress=progress
+        st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
 table_data =  [{ "task": '' ,"Done?":False } ]
 
 # # # # # # إنشاء كائن من الفئة Table
@@ -58,6 +64,8 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
+
 
 
 
