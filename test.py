@@ -18,3 +18,19 @@ df = pd.DataFrame(
         { "task": "" ,"Done?":False} ])
 #to increase the width of bage
 st.set_page_config(layout="wide")
+
+if "data_df" not in st.session_state:
+    st.session_state.data_df = pd.DataFrame(
+        [{ "task": '' ,"Done?":False } ])
+#df=pd.DataFrame(df)
+
+
+
+
+
+
+
+
+
+
+
