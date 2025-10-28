@@ -14,7 +14,7 @@ class introduction:
     if user_name:
         st.write(f"Welcome {user_name} ")
     st.subheader("The plan ")
-st.image(r"https://emojiat.com/assets/img/emoji/1f4cb.png")
+    st.image(r"https://emojiat.com/assets/img/emoji/1f4cb.png")
     
  
     def print_table(self):
@@ -42,6 +42,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
