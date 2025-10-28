@@ -40,7 +40,12 @@ class Table:
         new_row_number=1 
     else:
         new_row_number=st.session_state.data_df["task_num"].max()+1
-
+    if len(edited_df) > 0:
+        completed = edited_df["Done?"].sum()
+        total = len(edited_df)
+        progress = completed / total
+    else:
+        progress = 0
     def print_table(self):
         for row in self.data:
             # طباعة كل خلية في الصف مع ترك مسافة
@@ -53,6 +58,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
