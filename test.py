@@ -24,6 +24,10 @@ if "data_df" not in st.session_state:
         [{ "task": '' ,"Done?":False } ])
 #df=pd.DataFrame(df)
 
+df_with_row_numbers = st.session_state.data_df.reset_index(drop=False)
+df_with_row_numbers.rename(columns={'index': 'task_num'}, inplace=True)
+df_with_row_numbers['task_num'] = df_with_row_numbers['task_num'] + 1
+edited_df = st.data_editor(df_with_row_numbers, num_rows="dynamic", hide_index=True)
 
 
 
