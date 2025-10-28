@@ -8,9 +8,9 @@ class Table:
         [{ "task": '' ,"Done?":False } ])
 my_table.print_table()
 
-    def print_table(self):
+    # def print_table(self):
         # دالة لطباعة الجدول
-        pass # ستتم كتابة منطق الطباعة هنا
+    #     pass #
 class Table:
     def __init__(self, data):
         self.data = data
@@ -27,6 +27,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
