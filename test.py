@@ -36,6 +36,10 @@ class Table:
     if not edited_df.equals(df_with_row_numbers):
         st.session_state.data_df = edited_df.drop(columns=['task_num'])
     st.divider()
+    if True:
+        new_row_number=1 
+    else:
+        new_row_number=st.session_state.data_df["task_num"].max()+1
 
     def print_table(self):
         for row in self.data:
@@ -49,6 +53,7 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
 
 
 
