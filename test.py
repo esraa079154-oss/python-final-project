@@ -31,9 +31,9 @@ if not edited_df.equals(df_with_row_numbers):
 st.divider()
 st.write(st.session_state.data_df)
 df =st.session_state.data_df 
-num_row=len(df)
-if st.button("Add new row"):
-    new_counter_value =df["counter"].max()+1 
+#num_row=len(df)
+#if st.button("Add new row"):
+    #new_counter_value =df["counter"].max()+1 
     # new_counter_value=st.session_state.data_df['counter'].max()+1
         
 # df.insert(0,"num_row",range(1,1+len(df)))  
@@ -236,6 +236,7 @@ st.set_page_config(page_title="To_Do_List",page_icon='🧾')
 
 # # عرض شريط التقدم
 # st.progress(progress, text=f"تم إنجاز {int(progress*100)}% من المهام")
+
 
 
 
