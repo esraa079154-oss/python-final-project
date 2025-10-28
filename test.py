@@ -3,7 +3,7 @@ import pandas as pd
 #image at begin ofweb application
 st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
 #header
-st.header("To_do_list 📓")
+st.header("To_do_list")
 st.header("")
 #above the box of name 
 user_name=st.text_input(" 👉 Please enter your name : ")
@@ -236,6 +236,7 @@ st.set_page_config(page_title="To_Do_List",page_icon='🧾')
 
 # # عرض شريط التقدم
 # st.progress(progress, text=f"تم إنجاز {int(progress*100)}% من المهام")
+
 
 
 
