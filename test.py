@@ -1,14 +1,17 @@
 import streamlit as st
 import pandas as pd
+#image at begin ofweb application
 df = pd.DataFrame(
     [
         { "task": "" ,"Done?":False} ])
 class intro_table:
+    #to increase the width of bage
     st.set_page_config(layout="wide")
     st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
     #header
     st.header("To_do_list")
     st.header("")
+    #above the box of name 
     #above the box of name 
     user_name=st.text_input(" 👉 Please enter your name : ")
     if user_name:
@@ -25,6 +28,7 @@ class Table:
     def __init__(self, data):
     #st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
         self.data = data
+    #create table and insert two columns
     if "data_df" not in st.session_state:
           st.session_state.data_df = pd.DataFrame(
     [{ "task": '' ,"Done?":False } ])
@@ -40,6 +44,7 @@ class Table:
         new_row_number=1 
     else:
         new_row_number=st.session_state.data_df["task_num"].max()+1
+    #calculate the ratio of achievement of tasks
     if len(edited_df) > 0:
         completed = edited_df["Done?"].sum()
         total = len(edited_df)
@@ -53,7 +58,7 @@ class Table:
     #my_est=estimation(progress)
     st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
     st.set_page_config(page_title="To_Do_List",page_icon='🧾')
-
+#estimation
 class estimation :
     def __init__(self,progress): 
         self.progress=progress
@@ -66,41 +71,3 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
