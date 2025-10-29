@@ -13,7 +13,7 @@ class intro_table:
     st.header("")
     #above the box of name 
     #above the box of name 
-    user_name=st.text_input(" 👉 Please enter your name : ")
+    user_name=st.text_input(" 👉 Please enter your name to do your plan for one day : ")
     if user_name:
         st.write(f"Welcome {user_name} ")
     st.subheader("The plan ")
@@ -71,3 +71,4 @@ my_table = Table(table_data)
 # # # # # # طباعة الجدول
 
 my_table.print_table()
+
