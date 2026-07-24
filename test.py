@@ -3,6 +3,7 @@ import streamlit as st
 
 class ToDoApp:
     def __init__(self):
+   
         self.page_title = "To Do List"
         self.page_icon = "🧾"
         self.layout = "wide"
