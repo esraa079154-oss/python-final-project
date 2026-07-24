@@ -48,7 +48,7 @@ class ToDoApp:
     def show_tasks(self):
         """عرض المهام الحالية مع checkbox للتحديد و زر حذف."""
         if not st.session_state.tasks:
-            st.info("لا توجد مهام بعد، أضيفي أول مهمة من الأعلى 👆")
+            st.info("لا توجد مهام بعد، أضف أول مهمة من الأعلى 👆")
             return
 
         for i, item in enumerate(st.session_state.tasks):
