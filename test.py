@@ -1,74 +1,67 @@
 import streamlit as st
 import pandas as pd
-#image at begin ofweb application
-df = pd.DataFrame(
-    [
-        { "task": "" ,"Done?":False} ])
-class intro_table:
-    #to increase the width of bage
-    st.set_page_config(layout="wide")
-    st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
-    #header
-    st.header("To_do_list")
-    st.header("")
-    #above the box of name 
-    #above the box of name 
-    user_name=st.text_input(" 👉 Please enter your name to do your plan for one day : ")
+
+# يجب أن يكون هذا أول أمر Streamlit في الملف، ويُستدعى مرة واحدة فقط
+st.set_page_config(page_title="To Do List", page_icon="🧾", layout="wide")
+
+
+def initialize_state():
+    """ننشئ جدول المهام مرة واحدة فقط لكل جلسة (session)."""
+    if "tasks_df" not in st.session_state:
+        st.session_state.tasks_df = pd.DataFrame(
+            [{"Task": "", "Done?": False}]
+        )
+
+
+def show_header():
+    """عرض العنوان وحقل إدخال اسم المستخدم."""
+    st.header("To Do List 🧾")
+
+    user_name = st.text_input("👉 من فضلك أدخل اسمك لتخطط ليومك:")
     if user_name:
-        st.write(f"Welcome {user_name} ")
-    st.subheader("The plan ")
-    st.image(r"https://emojiat.com/assets/img/emoji/1f4cb.png")
-    
- 
-    def print_table(self):
-      pass
-        
-class Table:
-    
-    def __init__(self, data):
-    #st.image(r"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYjHrjikYhnIvKdjygdlHAYVCjwi1ZrXI9A&s")
-        self.data = data
-    #create table and insert two columns
-    if "data_df" not in st.session_state:
-          st.session_state.data_df = pd.DataFrame(
-    [{ "task": '' ,"Done?":False } ])
-    df=pd.DataFrame(df)
-    df_with_row_numbers = st.session_state.data_df.reset_index(drop=False)
-    df_with_row_numbers.rename(columns={'index': 'task_num'}, inplace=True)
-    df_with_row_numbers['task_num'] = df_with_row_numbers['task_num'] + 1
-    edited_df = st.data_editor(df_with_row_numbers, num_rows="dynamic", hide_index=True)
-    if not edited_df.equals(df_with_row_numbers):
-        st.session_state.data_df = edited_df.drop(columns=['task_num'])
+        st.write(f"أهلاً بك {user_name} 👋")
+
+    st.subheader("خطتك اليوم")
+
+
+def show_task_editor():
+    """
+    عرض جدول المهام القابل للتعديل.
+    مهم: نمرر st.session_state.tasks_df مباشرة كمصدر البيانات، ونعيد حفظ
+    الناتج فيها مباشرة بدون أي مقارنات يدوية معقدة. هذا يمنع مشكلة
+    اختفاء المهمة أو الحاجة لكتابتها مرتين.
+    """
+    edited_df = st.data_editor(
+        st.session_state.tasks_df,
+        num_rows="dynamic",       # يسمح بإضافة صفوف/مهام جديدة مباشرة
+        hide_index=True,
+        use_container_width=True,
+        key="task_editor",
+    )
+
+    st.session_state.tasks_df = edited_df
+    return edited_df
+
+
+def show_progress(edited_df):
+    """حساب ونسبة إنجاز المهام المكتملة وعرضها كشريط تقدم."""
+    total = len(edited_df)
+    completed = edited_df["Done?"].sum() if total > 0 else 0
+    progress = completed / total if total > 0 else 0
+
     st.divider()
-    if True:
-        new_row_number=1 
-    else:
-        new_row_number=st.session_state.data_df["task_num"].max()+1
-    #calculate the ratio of achievement of tasks
-    if len(edited_df) > 0:
-        completed = edited_df["Done?"].sum()
-        total = len(edited_df)
-        progress = completed / total
-    else:
-        progress = 0 
-    def print_table(self):
-        for row in self.data:
-            # طباعة كل خلية في الصف مع ترك مسافة
-            print(" | ".join(map(str, row))) 
-    #my_est=estimation(progress)
-    st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
-    st.set_page_config(page_title="To_Do_List",page_icon='🧾')
-#estimation
-class estimation :
-    def __init__(self,progress): 
-        self.progress=progress
-        st.progress(progress, text=f"The achievement equal to {int(progress*100)}% from all tasks")
-table_data =  [{ "task": '' ,"Done?":False } ]
+    st.progress(
+        progress,
+        text=f"لقد أنجزت {int(progress * 100)}% من مهامك",
+    )
 
-# # # # # # إنشاء كائن من الفئة Table
-my_table = Table(table_data)
 
-# # # # # # طباعة الجدول
+def main():
+    initialize_state()
+    show_header()
+    edited_df = show_task_editor()
+    show_progress(edited_df)
 
-my_table.print_table()
 
+if __name__ == "__main__":
+    main()
