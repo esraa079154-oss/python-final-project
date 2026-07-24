@@ -6,11 +6,9 @@ st.set_page_config(page_title="To Do List", page_icon="🧾", layout="wide")
 
 
 def initialize_state():
-    """ننشئ جدول المهام مرة واحدة فقط لكل جلسة (session)."""
-    if "tasks_df" not in st.session_state:
-        st.session_state.tasks_df = pd.DataFrame(
-            [{"Task": "", "Done?": False}]
-        )
+    """ننشئ قائمة المهام مرة واحدة فقط لكل جلسة (session)."""
+    if "tasks" not in st.session_state:
+        st.session_state.tasks = []  # كل عنصر: {"task": "...", "done": False}
 
 
 def show_header():
@@ -24,29 +22,43 @@ def show_header():
     st.subheader("خطتك اليوم")
 
 
-def show_task_editor():
+def add_task_form():
     """
-    عرض جدول المهام القابل للتعديل.
-    مهم: نمرر st.session_state.tasks_df مباشرة كمصدر البيانات، ونعيد حفظ
-    الناتج فيها مباشرة بدون أي مقارنات يدوية معقدة. هذا يمنع مشكلة
-    اختفاء المهمة أو الحاجة لكتابتها مرتين.
+    نموذج لإضافة مهمة جديدة.
+    استخدام st.form مهم جداً هنا: التطبيق ما يعيد التحميل (rerun) إلا
+    لما تضغطي زر "إضافة المهمة"، فما تنمسح المهمة ولا تحتاجي تكتبيها
+    مرتين، لأن الكتابة نفسها ما تسبب rerun فوري.
     """
-    edited_df = st.data_editor(
-        st.session_state.tasks_df,
-        num_rows="dynamic",       # يسمح بإضافة صفوف/مهام جديدة مباشرة
-        hide_index=True,
-        use_container_width=True,
-        key="task_editor",
-    )
+    with st.form("add_task_form", clear_on_submit=True):
+        new_task = st.text_input("اكتب مهمة جديدة:")
+        submitted = st.form_submit_button("➕ إضافة المهمة")
 
-    st.session_state.tasks_df = edited_df
-    return edited_df
+        if submitted and new_task.strip():
+            st.session_state.tasks.append({"task": new_task.strip(), "done": False})
+            st.rerun()
 
 
-def show_progress(edited_df):
-    """حساب ونسبة إنجاز المهام المكتملة وعرضها كشريط تقدم."""
-    total = len(edited_df)
-    completed = edited_df["Done?"].sum() if total > 0 else 0
+def show_tasks():
+    """عرض المهام الحالية مع خانة اختيار لتحديد المهام المنجزة، وزر حذف لكل مهمة."""
+    if not st.session_state.tasks:
+        st.info("لا توجد مهام بعد، أضيفي أول مهمة من الأعلى 👆")
+        return
+
+    for i, item in enumerate(st.session_state.tasks):
+        col1, col2 = st.columns([8, 1])
+        with col1:
+            checked = st.checkbox(item["task"], value=item["done"], key=f"task_{i}")
+            st.session_state.tasks[i]["done"] = checked
+        with col2:
+            if st.button("🗑️", key=f"delete_{i}"):
+                st.session_state.tasks.pop(i)
+                st.rerun()
+
+
+def show_progress():
+    """حساب نسبة إنجاز المهام المكتملة وعرضها كشريط تقدم."""
+    total = len(st.session_state.tasks)
+    completed = sum(1 for t in st.session_state.tasks if t["done"])
     progress = completed / total if total > 0 else 0
 
     st.divider()
@@ -59,9 +71,11 @@ def show_progress(edited_df):
 def main():
     initialize_state()
     show_header()
-    edited_df = show_task_editor()
-    show_progress(edited_df)
+    add_task_form()
+    show_tasks()
+    show_progress()
 
 
 if __name__ == "__main__":
     main()
+    
